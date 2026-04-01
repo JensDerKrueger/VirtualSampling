@@ -1,0 +1,6 @@
+ObjectFileName: bonsai.lz4
+Resolution: 128 128 128
+SliceThickness: 1 1 1
+Compression: lz4
+Format: uchar
+Endianess: little

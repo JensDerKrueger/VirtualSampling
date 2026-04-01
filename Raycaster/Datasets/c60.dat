@@ -1,0 +1,6 @@
+ObjectFileName: c60.lz4
+Resolution: 64 64 64
+SliceThickness: 1 1 1
+Compression: lz4
+Format: uchar
+Endianess: little

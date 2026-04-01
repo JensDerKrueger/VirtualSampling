@@ -1,0 +1,6 @@
+ObjectFileName: head512.lz4
+Resolution: 512 512 512
+SliceThickness: 1 1 1
+Compression: lz4
+Format: uchar
+Endianess: little

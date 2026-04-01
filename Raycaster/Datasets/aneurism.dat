@@ -1,0 +1,6 @@
+ObjectFileName: aneurism.lz4
+Resolution: 256 256 256
+SliceThickness: 1 1 1
+Compression: lz4
+Format: uchar
+Endianess: little
