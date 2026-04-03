@@ -4,6 +4,8 @@
 
 The application supports both interactive exploration and scripted evaluation. In addition to a native desktop build, the repository also contains a WebAssembly/WebGL build path and a small browser UI.
 
+If you want to try Raycaster without compiling anything locally, you can use the hosted web version at [cgvis.de/vs](https://www.cgvis.de/vs).
+
 ## What This Repository Contains
 
 - A native OpenGL volume renderer for 3D scalar datasets
@@ -75,6 +77,8 @@ Raycaster.xcodeproj
 This is the most convenient way to work on the macOS build inside Xcode.
 
 ### Web build
+
+If you only want to use Raycaster, you do not need to build the web version locally. A hosted version is available at [cgvis.de/vs](https://www.cgvis.de/vs).
 
 The project also supports an Emscripten build:
 
