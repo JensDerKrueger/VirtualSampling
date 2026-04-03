@@ -25,13 +25,13 @@ The repository ships with a small set of representative datasets and synthetic t
 - Synthetic: sphere, ramp, Marschner-Lobb
 - Real data: aneurism, bonsai, c60, head512, xmas
 
-These are used both for interactive inspection and for the scripted experiment runs in `Application/Scripts/`.
+These are used both for interactive inspection and for the scripted experiment runs in `Raycaster/Scripts/`.
 
 ## Build
 
 ### Native build
 
-The native application can be built with the provided `makefile` in `Application/`.
+The native application can be built with the provided `makefile` in `Raycaster/`.
 
 Requirements:
 
@@ -45,21 +45,21 @@ On macOS, the makefile expects Homebrew-style include/library locations for GLFW
 Build:
 
 ```bash
-cd Application
+cd Raycaster
 make
 ```
 
 Release build:
 
 ```bash
-cd Application
+cd Raycaster
 make release
 ```
 
 The executable is written to:
 
 ```text
-Application/build/Raycaster
+Raycaster/build/Raycaster
 ```
 
 The build also copies shaders, datasets, and scripts into the build output directory so the executable can find them at runtime.
@@ -79,43 +79,43 @@ This is the most convenient way to work on the macOS build inside Xcode.
 The project also supports an Emscripten build:
 
 ```bash
-cd Application
+cd Raycaster
 make emscripten
 ```
 
 This generates the browser build in:
 
 ```text
-Application/web/
+Raycaster/web/
 ```
 
 To serve the generated files locally:
 
 ```bash
-cd Application
-python3 ../server.py
+cd Raycaster
+python3 server.py
 ```
 
-or run `server.py` from the repository root, depending on where the generated web assets are located in your workflow.
+or run `python3 Raycaster/server.py` from the repository root.
 
-## Running The Application
+## Running Raycaster
 
 After building the native version:
 
 ```bash
-cd build/
+cd Raycaster/build
 ./Raycaster
 ```
 
-The application starts with a set of predefined render modes and a list of built-in datasets. Transfer functions, sampling parameters, mip levels, and camera transforms can be changed interactively or through scripts.
+Raycaster starts with a set of predefined render modes and a list of built-in datasets. Transfer functions, sampling parameters, mip levels, and camera transforms can be changed interactively or through scripts.
 
 ## Scripted Evaluation
 
 The application includes a command interpreter and several ready-made experiment scripts:
 
-- `Application/Scripts/quality.gsc`
-- `Application/Scripts/performance.gsc`
-- `Application/Scripts/scaling.gsc`
+- `Raycaster/Scripts/quality.gsc`
+- `Raycaster/Scripts/performance.gsc`
+- `Raycaster/Scripts/scaling.gsc`
 
 These scripts automate:
 
