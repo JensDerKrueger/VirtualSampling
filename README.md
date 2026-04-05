@@ -6,6 +6,10 @@ The application supports both interactive exploration and scripted evaluation. I
 
 If you want to try Raycaster without compiling anything locally, you can use the hosted web version at [cgvis.de/vs](https://www.cgvis.de/vs).
 
+[![Raycaster volume rendering example](docs/images/raycaster-t5.png)](https://www.cgvis.de/vs/?dataset=6&method=46&const=0&vs=5&sr=0&tfType=2&tfStart=0.236&tfWidth=0.015&transform=-0.697599113_0.716231883_-0.0191671364_0_0.0649159178_0.0365399681_-0.997222126_0_-0.713542402_-0.696904421_-0.0719851702_0_0_0_0_1%7E0.100000016_-0.199999988_1.30000019&background=1%2C1%2C1%2C1&tfEncoding=UkxFRgAEAAAAAAAA__8B_zUAAQYBDgEZASIBRAFNAVgBYAFvAX0BggGTAaoBvgHSAeAB6wH5uf9FAAEGASoBRAFjAW8BhQGcAbUBxgHdAegB-a__IQABHAEqATsBRwFPAlgDWwFSATsBKAEDDgABGgFwAc7A_w&alpha=0.9900000095367432&ortho=0&level=0)
+
+Click the image above to open this rendering directly in the hosted web viewer.
+
 ## What This Repository Contains
 
 - A native OpenGL volume renderer for 3D scalar datasets
@@ -79,6 +83,10 @@ This is the most convenient way to work on the macOS build inside Xcode.
 ### Web build
 
 If you only want to use Raycaster, you do not need to build the web version locally. A hosted version is available at [cgvis.de/vs](https://www.cgvis.de/vs).
+
+[![Raycaster web interface](docs/images/raycaster-web-interface.png)](https://www.cgvis.de/vs/?dataset=3&method=69&const=0&ortho=0&vs=10&sr=0&tfType=0&tfStart=0.703&tfWidth=0.313&alpha=0.9900000095367432&level=0&transform=0.812195241_0.370474875_0.450651467_0_-0.0432563201_0.808593869_-0.586774647_0_-0.581779897_0.457082629_0.672761619_0_0_0_0_1~0_0_0.600000024)
+
+Click the screenshot above to open the same configuration in the hosted web interface.
 
 The project also supports an Emscripten build:
 
