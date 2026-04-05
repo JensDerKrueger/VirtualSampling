@@ -10,6 +10,15 @@ If you want to try Raycaster without compiling anything locally, you can use the
 
 Click the image above to open this rendering directly in the hosted web viewer.
 
+## Documentation
+
+Detailed guides are available in `docs/`:
+
+- [Documentation index](docs/README.md)
+- [Installation and build](docs/installation.md)
+- [Scripting language and automation](docs/scripting.md)
+- [Usage and controls](docs/usage.md)
+
 ## What This Repository Contains
 
 - A native OpenGL volume renderer for 3D scalar datasets
@@ -34,6 +43,9 @@ The repository ships with a small set of representative datasets and synthetic t
 These are used both for interactive inspection and for the scripted experiment runs in `Raycaster/Scripts/`.
 
 ## Build
+
+For platform-specific setup and more detailed build instructions, see
+[docs/installation.md](docs/installation.md).
 
 ### Native build
 
@@ -75,7 +87,7 @@ The build also copies shaders, datasets, and scripts into the build output direc
 An Xcode project is included:
 
 ```text
-Raycaster.xcodeproj
+Raycaster/Raycaster.xcodeproj
 ```
 
 This is the most convenient way to work on the macOS build inside Xcode.
@@ -121,6 +133,8 @@ cd Raycaster/build
 
 Raycaster starts with a set of predefined render modes and a list of built-in datasets. Transfer functions, sampling parameters, mip levels, and camera transforms can be changed interactively or through scripts.
 
+For keyboard and mouse interaction details, see [docs/usage.md](docs/usage.md).
+
 ## Scripted Evaluation
 
 The application includes a command interpreter and several ready-made experiment scripts:
@@ -138,6 +152,9 @@ These scripts automate:
 - screenshot capture
 - FPS logging
 - scaling and quality sweeps
+
+For language syntax, command reference, and execution examples, see
+[docs/scripting.md](docs/scripting.md).
 
 This makes the repository suitable both for reproducing figures and for extending the evaluation with additional rendering methods.
 
