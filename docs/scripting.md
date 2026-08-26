@@ -229,8 +229,12 @@ These commands are registered by `Raycaster` itself.
   Rotate around the y axis.
 - `addrotationz <degrees>`
   Rotate around the z axis.
+- `addrotationaxis <x> <y> <z> <degrees>`
+  Rotate around the specified axis.
 - `settranslation <x> <y> <z>`
   Set the translation vector.
+- `addtranslation <x> <y> <z>`
+  Add to the translation vector.
 - `settransformparams <encoded>`
   Restore a transform from the URL-style encoded representation.
 
