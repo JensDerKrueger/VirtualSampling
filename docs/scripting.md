@@ -170,7 +170,7 @@ These commands are registered by the shared `GLApp` base class.
   Append the current wall-clock time to the log.
 - `logfps`
   Record the measured FPS for the current accumulation interval.
-- `logGLInfo <includeExtensions>`
+- `logGPUInfo <includeExtensions>`
   Write OpenGL information to the log.
 - `log <message...>`
   Append an arbitrary message to the log.
