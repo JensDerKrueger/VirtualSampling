@@ -111,9 +111,21 @@ void Raycaster::registerCommands() {
     updateMatrices();
   }
   );
+  interpreter.registerCommand("addrotationaxis",
+  [this](float x,float y,float z,float degree) {
+    rotation = Mat4::rotationAxis(Vec3(x,y,z),degree) * rotation;
+    updateMatrices();
+  }
+  );
   interpreter.registerCommand("settranslation",
   [this](float x,float y,float z) {
     this->translation = Vec3(x,y,z);
+    updateMatrices();
+  }
+  );
+  interpreter.registerCommand("addtranslation",
+  [this](float x,float y,float z) {
+    this->translation = this->translation + Vec3(x,y,z);
     updateMatrices();
   }
   );
