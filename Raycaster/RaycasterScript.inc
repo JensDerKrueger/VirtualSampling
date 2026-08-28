@@ -140,17 +140,17 @@ void Raycaster::registerCommands() {
   }
   );
 
-  interpreter.registerCommand("setAmbientColor",
+  interpreter.registerCommand("setambientcolor",
   [this](float r,float g,float b) {
     setAmbientColor(r,g,b);
   }
   );
-  interpreter.registerCommand("setDiffuseColor",
+  interpreter.registerCommand("setdiffusecolor",
   [this](float r,float g,float b) {
     setDiffuseColor(r,g,b);
   }
   );
-  interpreter.registerCommand("setSpecularColor",
+  interpreter.registerCommand("setspecularcolor",
   [this](float r,float g,float b) {
     setSpecularColor(r,g,b);
   }
