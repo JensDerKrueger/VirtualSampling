@@ -140,6 +140,10 @@ public:
   void setTFParams(bool gaussian, float start, float width);
   void setCustomTF(const std::string& encodedTF);
   void setTransformParams(const std::string& transformStr);
+  void setAmbientColor(float r, float g, float b);
+  void setDiffuseColor(float r, float g, float b);
+  void setSpecularColor(float r, float g, float b);
+
   void setAlphaThreshold(float threshold);
   bool setLevel(size_t level);
   void setUseOrtho(bool newUseOrtho);
@@ -208,6 +212,9 @@ private:
   float tfStart{0.12f};
   float tfWidth{0.1f};
   TFType tfType{TFType::SMOOTHSTEP};
+  Vec3 ambientColor;
+  Vec3 diffuseColor;
+  Vec3 specularColor;
   bool leftMouseDown{false};
   bool rightMouseDown{false};
   double xPositionStart{0};

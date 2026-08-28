@@ -215,6 +215,14 @@ These commands are registered by `Raycaster` itself.
 - `setusennfilter <enabled>`
   Toggle nearest-neighbor filtering.
 
+### Colors
+- `setAmbientColor <red> <green> <blue>`
+Set the ambient color for lighting.
+- `setDiffuseColor <red> <green> <blue>`
+Set the diffuse color for lighting.
+- `setSpecularColor <red> <green> <blue>`
+Set the specular color for lighting.
+
 ### Camera and transform
 
 - `setuseortho <enabled>`

@@ -792,6 +792,8 @@
         <div class="authors">
           <a href="https://www.cgvis.de/hrycak.shtml" target="_blank" rel="noopener noreferrer">Camilla Hrycak<sup>1</sup></a>
           <span>·</span>
+          <a hreaf "#">Shasha Li<sup>1</sup></a>
+          <span>·</span>
           <a href="https://vccvisualization.org/people/hadwiger/" target="_blank" rel="noopener noreferrer">Markus Hadwiger<sup>2</sup></a>
           <span>·</span>
           <a href="https://www.cgvis.de/krueger.shtml" target="_blank" rel="noopener noreferrer">Jens Krüger<sup>1</sup></a>
@@ -800,7 +802,7 @@
         <ul class="affiliations">
           <li>
             <span class="affTag">1</span>
-            <span><a href="https://www.cgvis.de/" target="_blank" rel="noopener noreferrer">Computer Graphics and Visualization Group</a>, University of Duisburg-Essen (Camilla Hrycak, Jens Krüger)</span>
+            <span><a href="https://www.cgvis.de/" target="_blank" rel="noopener noreferrer">Computer Graphics and Visualization Group</a>, University of Duisburg-Essen (Camilla Hrycak, Shasha Li, and Jens Krüger)</span>
           </li>
           <li>
             <span class="affTag">2</span>
@@ -964,8 +966,10 @@
               <div class="checkRow">
                 <input id="ertCheckbox" type="checkbox" />
                 <label for="ertCheckbox" class="checkLabel">Early Ray Termination</label>
+                <input id="specularCheckbox" type="checkbox" />
+                <label for="specularCheckbox" class="checkLabel">Specular</label>
                 <input id="orthoProjection" type="checkbox" />
-                <label for="orthoProjection" class="checkLabel">Orthographic Projection</label>
+                <label for="orthoProjection" class="checkLabel">Ortho Projection</label>
               </div>
             </div>
 
@@ -1135,9 +1139,9 @@
   </div>
 
   <script>
-    const PAPER_TITLE = "Reassessing Quality, Performance, and Reproducibility of Higher-Order Filtering and Virtual Samples in Volume Rendering";
+    const PAPER_TITLE = "When Is Higher-Order Sampling Worth It? A Practical, Reproducible Evaluation for Volume Rendering";
     const PAPER_ABSTRACT =
-      "Higher-order filtering for scalar volume rendering—including recent virtual-sample formulations—promises improved reconstruction quality over trilinear interpolation, yet its use in practice remains limited. Practical adoption is hindered not only by computational cost, but also by the fragmented state of the literature: existing approaches are described across a large body of publications spanning several decades, complete reusable implementations are rare, and published evaluations often use differing datasets and comparison baselines, making it difficult to form a consistent overall picture. We present a compact, GPU-oriented, open-source reference implementation that is easy to use, cross-platform, and supports both native execution and WebAssembly deployment. The framework is designed for straightforward extension, enabling future research to integrate and compare new techniques against a broad range of existing methods.\n\nBuilding on this framework, we perform a systematic comparison of representative higher-order and virtual-sample methods on synthetic and real datasets, analyzing visual quality, parameter sensitivity, and performance under realistic rendering workloads across a range of graphics hardware. The framework also enables rapid experimentation; as a case study, we evaluate a virtual-sampling scheme based on monotone cubic interpolation, extending Hermite interpolation while avoiding overshoot and achieving comparable quality with improved robustness.\n\nBy consolidating these methods in a single, accessible code base and evaluating them within a consistent benchmark setting, we enable direct comparison across existing approaches and provide a clearer picture of when higher-order filtering yields meaningful benefits and when improvements are marginal.";
+    "Higher-order filtering and virtual sampling can improve scalar volume rendering beyond trilinear interpolation, but their practical adoption remains limited. Existing methods are distributed across decades of literature, implementations often omit consequential details, and evaluations use incomparable datasets and baselines. Consequently, practitioners lack clear guidance on when the additional complexity of higher-order reconstruction is justified. We present an open-source, GPU-oriented reference system that consolidates representative true- and virtual-sampling methods in a compact, extensible implementation for native and WebAssembly-based execution. Using this system, we conduct a systematic comparison across synthetic and real volume datasets, illuminated and non-illuminated rendering modes, and multiple GPU platforms. Our analysis separates quality, performance, preprocessing, storage, gradient reconstruction, and overshoot-related integration costs to derive practical method-selection guidance rather than a single global ranking. We further introduce monotone Hermite virtual sampling, a bounded virtual-sampling method that avoids overshoot while retaining a quality and performance profile comparable to existing Hermite-based approaches. By releasing the implementation, evaluation scripts, measurements, and interactive reproductions of all figures, we provide both a practical reassessment of higher-order volume rendering and a reproducible basis for future comparisons..";
 
     document.title = PAPER_TITLE;
     document.getElementById("paperTitle").textContent = PAPER_TITLE;
@@ -1405,6 +1409,10 @@
       if (p.has("ortho")) orthoProjection.checked =
       clampInt(p.get("ortho"), 0, 1, orthoProjection.checked ? 1 : 0) === 1;
 
+      if (p.has("specular")) specularCheckbox.checked =
+      clampInt(p.get("specular"), 0, 1, specularCheckbox.checked ? 1 : 0) === 1;
+      else specularCheckbox.checked = true
+
       if (p.has("vs")) virtualSamplesSelect.value =
       String(clampInt(p.get("vs"), 1, 50, Number.parseInt(virtualSamplesSelect.value, 10)));
       
@@ -1460,6 +1468,8 @@
       p.set("method", String(methodSelect.selectedIndex));
       p.set("const", constantSampleCount.checked ? "1" : "0");
       p.set("ortho", orthoProjection.checked ? "1" : "0");
+      p.set("specular", specularCheckbox.checked ? "1" : "0");
+
       p.set("vs", String(virtualSamplesSelect.value));
       p.set("sr", String(samplingRateSelect.value));
       
@@ -1516,6 +1526,7 @@
       const methodIndex = methodSelect.selectedIndex;
       const constant = constantSampleCount.checked;
       const ortho = orthoProjection.checked;
+      const specular = specularCheckbox.checked;
       const virtualSamples = parseInt(virtualSamplesSelect.value, 10);
       const samplingRateExp = parseInt(samplingRateSelect.value, 10);
       const tfStart = Number.parseFloat(tfStartSlider.value);
@@ -1528,6 +1539,12 @@
       safeCcall("setVirtualSamples", "void", ["number"], [virtualSamples]);
       safeCcall("setSamplingRateExp", "void", ["number"], [samplingRateExp]);
       safeCcall("setAlphaThreshold", "void", ["number"], [ertAlphaThreshold]);
+
+      if (specular) {
+        safeCcall("setSpecularColor", "void", ["number","number","number"], [0.8,0.8,0.8]);
+      } else {
+        safeCcall("setSpecularColor", "void", ["number","number","number"], [0,0,0]);
+      }
 
       const tfType = parseInt(transferFunctionSelect.value, 10);
       if (tfType == 2) {
@@ -1620,6 +1637,11 @@
         ertAlphaThreshold = ertCheckbox.checked ? 0.99 : 2.0;
         writeStateToUrl();
         safeCcall("setAlphaThreshold", "void", ["number"], [ertAlphaThreshold]);
+      });
+
+      specularCheckbox.addEventListener("change", () => {
+        writeStateToUrl();
+        applyControlsToWasm();
       });
 
       orthoProjection.addEventListener("change", () => {

@@ -119,6 +119,9 @@ void Raycaster::reset() {
   constantSampleCount = false;
   clipBoxSize = Vec3{1,1,1};
   clipBoxShift = Vec3{0,0,0};
+  ambientColor = {0.1f,0.1f,0.1f};
+  diffuseColor = {0.5f,0.5f,0.5f};
+  specularColor = {0.8f,0.8f,0.8f};
   updateTitle();
   updateVolume();
   setUseNNFilter(useNNFilter);
@@ -209,6 +212,10 @@ void Raycaster::setupShader() {
   }
   
   if (renderMode.usesLighting) {
+    currentProgram.setUniform("vLightAmbient", ambientColor);
+    currentProgram.setUniform("vLightDiffuse", diffuseColor);
+    currentProgram.setUniform("vLightSpecular", specularColor);
+
     currentProgram.setUniform("modelView", modelView);
     currentProgram.setUniform("modelViewIT", modelViewIT);
   }
@@ -306,6 +313,18 @@ void Raycaster::setTFParams(bool gaussian, float start, float width) {
   tfStart = start;
   tfWidth = std::max(0.00001f,width);
   updateTransferFunction();
+}
+
+void Raycaster::setAmbientColor(float r, float g, float b) {
+  ambientColor = {r,g,b};
+}
+
+void Raycaster::setDiffuseColor(float r, float g, float b) {
+  diffuseColor = {r,g,b};
+}
+
+void Raycaster::setSpecularColor(float r, float g, float b) {
+  specularColor = {r,g,b};
 }
 
 void Raycaster::loadTFFile(const std::string& filename) {

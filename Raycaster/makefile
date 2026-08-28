@@ -54,7 +54,7 @@ EM_EXPORTED_FUNCTIONS := '["_main","_malloc","_free","_setDataset",\
 "_setMethod","_setConstantSampleCount","_setVirtualSamples",\
 "_setSamplingRateExp","_setTFParams","_setCustomTF","_setAlphaThreshold",\
 "_setTransformParams","_setBackground","_setUseOrtho",\
-"_setLevel"]'
+"_setLevel", "_setAmbientColor", "_setDiffuseColor", "_setSpecularColor"]'
 EM_RUNTIME_METHODS    := '["ccall"]'
 
 EM_LINK_FLAGS := \

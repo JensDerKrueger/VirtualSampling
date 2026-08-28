@@ -97,6 +97,24 @@ std::shared_ptr<Raycaster> raycaster = nullptr;
       }
     }
 
+    EMSCRIPTEN_KEEPALIVE void setAmbientColor(float r, float g, float b) {
+      if (raycaster) {
+        raycaster->setAmbientColor(r,g,b);
+      }
+    }
+
+    EMSCRIPTEN_KEEPALIVE void setDiffuseColor(float r, float g, float b) {
+      if (raycaster) {
+        raycaster->setDiffuseColor(r,g,b);
+      }
+    }
+
+    EMSCRIPTEN_KEEPALIVE void setSpecularColor(float r, float g, float b) {
+      if (raycaster) {
+        raycaster->setSpecularColor(r,g,b);
+      }
+    }
+
     EMSCRIPTEN_KEEPALIVE void setVirtualSamples(int count) {
       if (raycaster) {
         raycaster->setVirtualSamples(std::max<int>(1,count));

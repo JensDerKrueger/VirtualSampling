@@ -4,6 +4,10 @@ uniform sampler1D transfer;
 uniform mat4 modelView;
 uniform mat4 modelViewIT;
 
+uniform vec3 vLightAmbient;
+uniform vec3 vLightDiffuse;
+uniform vec3 vLightSpecular;
+
 uniform vec3 minBounds;
 uniform vec3 maxBounds;
 uniform vec3 voxelCount;
@@ -71,9 +75,6 @@ bool inBounds(vec3 pos) {
 }
 
 vec3 lighting(vec3 vPosition, vec3 vNormal, vec3 color) {
-  vec3 vLightAmbient  = vec3(0.1,0.1,0.1);
-  vec3 vLightDiffuse  = vec3(0.5,0.5,0.5);
-  vec3 vLightSpecular = vec3(0.8,0.8,0.8);
   vec3 lightDir       = vec3(0.0,0.0,1.0);
 
   vec3 vViewDir    = normalize(vPosition-vec3(0.0,0.0,0.0));
