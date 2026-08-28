@@ -139,6 +139,24 @@ void Raycaster::registerCommands() {
     setTransformParams(transform);
   }
   );
+
+  interpreter.registerCommand("setAmbientColor",
+  [this](float r,float g,float b) {
+    setAmbientColor(r,g,b);
+  }
+  );
+  interpreter.registerCommand("setDiffuseColor",
+  [this](float r,float g,float b) {
+    setDiffuseColor(r,g,b);
+  }
+  );
+  interpreter.registerCommand("setSpecularColor",
+  [this](float r,float g,float b) {
+    setSpecularColor(r,g,b);
+  }
+  );
+
+
 }
 
 /*
